@@ -1,38 +1,94 @@
+
+
 .App {
-  text-align: center;
+  display: grid;
+  grid-template-columns: 25% auto;
+  grid-template-rows: 12.5% 12.5% auto;
+  width: 60%;
+  height: 90%;
+  border: 1px solid black;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+
+.App > *{
+  border: 1px solid black;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.grid-item-zero{
+  grid-column-start: span 4;
+  display: flex;
+  /* justify-content: space-around; */
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.grid-item-one {
+  background-color: rgb(243, 148, 65)
+}
+
+.grid-item-two {
+  grid-column-start: span 3;
+  background-color: rgb(204, 245, 180)
+}
+
+.grid-item-three {
+  background-color: rgb(204, 245, 180)
+}
+
+.grid-item-four{
+  grid-column-start: span 3;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.image-container{
+  display: flex;
+  justify-self: center;
+  align-items: center;
+}
+
+.searchbox {
+
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
 }
 
-.App-link {
-  color: #61dafb;
+.searchbtn {
+  width: 50%;
+  margin: 3%;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.searchfield {
+  width: 100%;
+}
+
+.saved-container {
+  display: grid;
+  grid-template-rows: 12.5% auto;
+  width: 60%;
+  height: 90%;
+  border: 1px solid black;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  
+
+}
+
+.saved-container > *{
+  border: 1px solid black;
+} 
+
+#saveBtnClicked{
+  background-color: purple;
+}
+
+
+.save {
+  position: absolute;
+  right: 5%;
+}
+
+
+.help {
+  width: 100%;
 }
