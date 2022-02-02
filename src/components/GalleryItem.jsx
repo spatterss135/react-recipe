@@ -37,14 +37,17 @@ export default function GalleryItem({data, handleSave, savedData}){
     return (
         <div className="card" style={{width: '100%'}}>
         <div className="row">
-          <div className="col-md-4 image-container" >
+          <div className="col-md-4 image-container pe-0" >
             <img src={data.image} alt="" style={{width: '100%'}}/>
           </div>
-          <div className="col-md-8">
+          <div className="ps-0 col-md-8">
             <div className="card-body">
               <h5 className="card-title">{data.title}</h5>
+              <div className="card-text">
               <ToggleText text={data.summary} />
-
+              </div>
+            </div>
+            <div className='card-footer footer'>
               <a target="_blank" href={data.spoonacularSourceUrl} className="btn btn-primary">Recipe</a>
               <span className="card-text">
                 {diets}
@@ -58,7 +61,7 @@ export default function GalleryItem({data, handleSave, savedData}){
                 saveItem(e,data)}}>S</button>}
                 
                 </span>
-            </div>
+              </div>
           </div>
         </div>
       </div>
