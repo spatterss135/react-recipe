@@ -35,6 +35,23 @@ export default function GalleryItem({data, handleSave, savedData}){
         )
     })
 
+    let healthScore = function(){
+      let color;
+      if (data.healthScore < 25){
+        color = 'red'
+      }
+      else if (data.healthScore < 50){
+        color = 'orange'
+      }
+      else {
+        color = 'green'
+      }
+
+      return (
+          <span className={`score ${color}`}>{data.healthScore}</span>
+      )
+    }
+
 
     
 
@@ -48,7 +65,10 @@ export default function GalleryItem({data, handleSave, savedData}){
           </div>
           <div className="ps-0 col-md-8">
             <div className="card-body">
+              <div className="title-area">
               <h5 className="card-title">{data.title}</h5>
+              {healthScore()}
+              </div>
               <div className="card-text" style={{paddingBottom: '3em'}}>
               <ToggleText text={data.summary} />
               </div>

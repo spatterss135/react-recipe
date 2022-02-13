@@ -30,7 +30,7 @@ function App() {
 
   useEffect(()=> {
     const fetchData = async ()=> {
-      const response = await fetch(`https://api.spoonacular.com/recipes/complexSearch?query=${searchTerm}&apiKey=566afa07d0444141b7ad52602d8142a4&addRecipeInformation=true&number=100&fillIngredients=true`)
+      const response = await fetch(`https://api.spoonacular.com/recipes/complexSearch?query=${searchTerm}&apiKey=${process.env.REACT_APP_API_ONE}&addRecipeInformation=true&number=100&fillIngredients=true`)
       const rData = await response.json()
       let filteredResults = []
       rData.results.forEach(food => {
