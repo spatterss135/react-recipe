@@ -2,18 +2,21 @@
 
 export default function Filters({filters, setFilters}){
 
-    
 
+    function handleFilters(){
+        setFilters(filterArray)
+    }
+    
+    let filterArray = []
     function handleCheck(e){
-        if (e.target.checked && !filters.includes(e.target.value)){
-            setFilters([...filters, e.target.value])
+        if (e.target.checked){
+            filterArray.push(e.target.value)
         }
         else{
-            let index = filters.indexOf(e.target.value)
-            console.log(index)
-            setFilters([...filters.slice(0, index), ...filters.slice(index+1)])
+            let index = filterArray.indexOf(e.target.value)
+            filterArray = [...filterArray.slice(0, index), ...filterArray.slice(index+1)]
         }
-        console.log(filters)
+        console.log(filterArray)
     }
 
     return(
@@ -29,6 +32,8 @@ export default function Filters({filters, setFilters}){
         <br />
         <input onClick={(e)=> handleCheck(e)} type="checkbox" id="glutenFreebox" name="glutenFree" value="glutenFree" />
         <label htmlFor="glutenFreebox">gluten-free</label>
+
+        <button onClick={handleFilters}>Apply Filters</button>
     </div>
 
     )

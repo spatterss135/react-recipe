@@ -3,13 +3,13 @@ import { DataContext } from "../context/DataContext"
 import Nav from "./Nav"
 import GalleryItem from "./GalleryItem"
 
-export default function SavedRecipesView() {
+export default function SavedRecipesView({handleSave}) {
 
     let savedData = useContext(DataContext)
     
     let cards = savedData.map((food) => {
         return (
-            <GalleryItem data={food} savedData={savedData}/>
+            <GalleryItem data={food} savedData={savedData} handleSave={handleSave}/>
         )
     })
     return(

@@ -16,8 +16,8 @@ export default function ToggleText({text}) {
 
     return (
         <div>
-            <span>{!toggle ? merged.slice(0,20):merged}</span>
-            <a href="" onClick={handleClick}>{!toggle?'Expand':'Less'}</a>
+            <span>{!toggle ? merged.slice(0,20)+'...':merged}</span>
+            <a  className='ps-2 text-expandor' href="" onClick={handleClick}>{!toggle?'expand':'less'}</a>
         </div>
     )
 }

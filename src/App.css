@@ -103,3 +103,7 @@
   flex-direction: column;
   justify-items:start;
 }
+
+.text-expandor{
+  font-size: x-small;
+}

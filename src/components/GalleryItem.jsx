@@ -3,11 +3,11 @@ import { useState } from "react"
 
 export default function GalleryItem({data, handleSave, savedData}){
 
-  let [toggle, setToggle] = useState(false)
+
+  let isInSavedData = savedData.some(item => item.sourceUrl === data.sourceUrl)
 
     function saveItem(e, food){
-      setToggle(!toggle)
-      if (!toggle){
+      if (!isInSavedData){
         e.target.setAttribute('id', 'saveBtnClicked')
         handleSave([...savedData, food])
       }
@@ -25,7 +25,7 @@ export default function GalleryItem({data, handleSave, savedData}){
       if (diet.includes('vegetarian')){ diet='vegetarian'}
       if (diet.includes('vegan')){ diet='vegan'}
       if (diet.includes('dairy')){ diet='dairyFree'}
-      // if (diet.includes('gluten')){ diet='glutenFree'}
+      if (diet.includes('gluten')){ diet='glutenFree'}
         return (
             <span>
                 <img src={`images/${diet}.png`} className="mx-1" width='20px' alt="" />
@@ -34,6 +34,12 @@ export default function GalleryItem({data, handleSave, savedData}){
             
         )
     })
+
+
+    
+
+    
+
     return (
         <div className="card" style={{width: '100%'}}>
         <div className="row">
@@ -43,7 +49,7 @@ export default function GalleryItem({data, handleSave, savedData}){
           <div className="ps-0 col-md-8">
             <div className="card-body">
               <h5 className="card-title">{data.title}</h5>
-              <div className="card-text">
+              <div className="card-text" style={{paddingBottom: '3em'}}>
               <ToggleText text={data.summary} />
               </div>
             </div>
@@ -53,7 +59,7 @@ export default function GalleryItem({data, handleSave, savedData}){
                 {diets}
               </span>
               <span className='save'>
-                {!savedData.includes(data)?
+                {!isInSavedData?
                 <button className='btn btn-success' style={{borderRadius: "50%"}} onClick={(e)=> {
                 saveItem(e,data)}}>S</button>
                 :
