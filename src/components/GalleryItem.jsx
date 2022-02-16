@@ -2,24 +2,37 @@ import ToggleText from "./ToggledText"
 import { useState } from "react"
 
 export default function GalleryItem({data, handleSave, savedData}){
+    const fetchSavedData =  async ()=> {
+      
+      const response = await fetch(`http://localhost:9000/recipes`)
+      const res = await response.json()
+      res.map(recipe => {
+        recipe.diets = recipe.diets.split(',')
+      })
+      handleSave(res)
+    }
 
 
-  let isInSavedData = savedData.some(item => item.sourceUrl === data.sourceUrl)
 
-    function saveItem(e, food){
+  let isInSavedData = savedData.some(item => item.spoonacularSourceUrl === data.spoonacularSourceUrl)
+
+    async function saveItem(e, food){
       if (!isInSavedData){
         e.target.setAttribute('id', 'saveBtnClicked')
-        handleSave([...savedData, food])
+        await fetch(`http://localhost:9000/recipes/save/?id=${food.id}&title=${food.title}&summary=${food.summary}&diets=${String(food.diets)}&image=${food.image}&spoonacularSourceUrl=${food.spoonacularSourceUrl}&healthScore=${food.healthScore}`, {
+          method: "POST"
+        })
+        fetchSavedData()
       }
       else {
         e.target.setAttribute('id', '')
-        let index = savedData.indexOf(food)
-        handleSave([...savedData.slice(0, index), ...savedData.slice(index+1)])
-
+        await fetch(`http://localhost:9000/recipes/delete/?id=${food.id}&title=${food.title}&summary=${food.summary}&diets=${String(food.diets)}&image=${food.image}&spoonacularSourceUrl=${food.spoonacularSourceUrl}&healthScore=${food.healthScore}`, 
+        { method: 'DELETE'})
+        fetchSavedData()
       }
       
+      
     }
-
 
     let diets = data.diets.map(diet => {
       if (diet.includes('vegetarian')){ diet='vegetarian'}

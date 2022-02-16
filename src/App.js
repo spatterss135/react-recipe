@@ -28,6 +28,7 @@ function App() {
     setSearchTerm(term)
   }
 
+
   useEffect(()=> {
     const fetchData = async ()=> {
       const response = await fetch(`https://api.spoonacular.com/recipes/complexSearch?query=${searchTerm}&apiKey=${process.env.REACT_APP_API_ONE}&addRecipeInformation=true&number=100&fillIngredients=true`)
@@ -46,12 +47,22 @@ function App() {
       })
       setData(filteredResults)
     }
+
+    const fetchSavedData =  async ()=> {
+      const response = await fetch(`http://localhost:9000/recipes`)
+      const res = await response.json()
+      res.map(recipe => {
+        recipe.diets = recipe.diets.split(',')
+      })
+      setSavedData(res)
+    }
+
     fetchData()
+    fetchSavedData()
   }, [searchTerm, filters])
 
   return (
     <>
-    {/* <Nav /> */}
     <Router>
         <Routes>
         <Route path='/' element={
